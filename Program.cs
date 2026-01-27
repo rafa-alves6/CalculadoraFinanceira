@@ -37,13 +37,13 @@ static List<SacTable> CalculateSAC(Loan loan)
     List <SacTable> tables = [];
     double amortizationValue = loan.PresentValue / loan.Time;
     double outstandingPrincipal = loan.PresentValue;
-    double i = loan.InterestRate / 100;
+    double interestRate = loan.InterestRate / 100;
     int installmentCounter = 0;
     double totalPaid = 0;
     
-    while (outstandingPrincipal > 0)
+    for(int i = 0; i < loan.Time; i++)
     {
-        double interestValue = outstandingPrincipal * i;
+        double interestValue = outstandingPrincipal * interestRate;
         double installmentValue = amortizationValue + interestValue;
         outstandingPrincipal -= amortizationValue;
         installmentCounter++;
@@ -54,9 +54,13 @@ static List<SacTable> CalculateSAC(Loan loan)
     return tables;
 }
 
-Loan l1 = new(100000, 1.5, 120, "SAC");
+double presentValue = 100000.3, interestRate = 1.5;
+int timeLoan = 120;
+Loan l1 = new(presentValue, interestRate, timeLoan, "SAC");
 double price = CalculatePRICE(l1);
+double totalPaidPrice = price * timeLoan;
 Console.WriteLine($"Tabela PRICE: R$ {price:F2}");
+Console.WriteLine($"Total pago na tabela price: R$ {totalPaidPrice:F2}");
 List<SacTable> sacTable = CalculateSAC(l1);
 
 foreach (SacTable table in sacTable)
