@@ -4,7 +4,7 @@
  * 
  * Using the PRICE system, a loan's installments are to be paid in an equal amount over time, as per this formula:
  * 
- * PMT = PV * ((1+i)^n * i / (1+i)^n - 1,
+ * PMT = PV * ((1+i)^n * i / (1+i)^n - 1),
  * 
  * PMT being equal to the value of the installments to be paid;
  * PV being equal to the Present Value (or the loan value);
@@ -73,3 +73,4 @@ foreach (SacTable table in sacTable)
     Console.Write($"Total pago: R$ {table.TotalPaid:F2}");
     Console.WriteLine("\n");
 }
+
